@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Schilderijen uit 2017</title>
+<link rel="stylesheet" href="../../css/style.css">
+
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Schilderijen uit 2017</h1>
+    <p>Klik op een thumbnail om de afbeelding te vergroten, klik opnieuw om terug te keren.</p>
+
+    <div class="gallery"></div>
+
+    <div id="overlay">
+        <img id="bigimg" src="">
+    </div>
+</div>
+
+<script>
+    const gallery = document.querySelector('.gallery');
+
+    // Beschrijvingen per object (pas aan zoals jij wilt)
+    const captions = {
+    "016": "50×50 cm - olieverf op paneel",
+    "017": "40×50 cm - olieverf op doek, vrije kopie van een werk van Luca Indraccolo",
+    "018": "30×40 cm - Portret van Trudy, olieverf op paneel",
+    "014": "50×50 cm - Zelfportret met hondjes, olieverf op paneel",
+    "037": "50×50 cm - Portret van Peter, olieverf op doek, verkocht",
+    "042": "50×50 cm - Violetta, olieverf op doek",
+    "044": "50×50 cm - Ezel en haan, olieverf op doek",
+    "046": "40×40 cm - Waar blijft de tijd, olieverf op doek, verkocht",
+    "047": "20×30 cm - Poppy, acryl op schilderskarton",
+    "049": "50×70 cm - Danae, olieverf op canvas, verkocht",
+    "050": "70×45 cm - Memories, olieverf op antiek eiken paneel, verkocht",
+    "054": "40×40 cm - Gerard, olieverf op doek, verkocht",
+    "055": "50×70 cm - Mia, olieverf op doek, verkocht",
+    "056": "50×70 cm - Enigma, olieverf op doek, niet meer beschikbaar",
+    "057": "50×50 cm - Kaj, olieverf op doek, verkocht",
+    "058": "60×80 cm - Frédérique, olieverf op doek, verkocht",
+    "059": "34×36 cm - Brigitte, olieverf op paneel",
+    "060": "40×40 cm - Laurent, olieverf op doek, verkocht",
+    "061": "38×74 cm - Brigitte 2, olieverf op paneel, niet meer beschikbaar",
+    "063": "60×80 cm - Modern Times, olieverf op doek, niet te koop",
+    "064": "60×80 cm - Febe, olieverf op doek, niet te koop",
+    "065": "40×40 cm - Saliha, olieverf op doek, verkocht",
+    "066": "50×70 cm - Bedouine, olieverf op doek, verkocht",
+    "067": "37×67 cm - Marie d'Oro, olieverf op paneel, niet beschikbaar",
+    "068": "52×61 cm - Feeling blue, olieverf op paneel, verkocht", 
+    "070": "40x60 cm - Baby, olieverf op paneel, verkocht",
+    "072": "60x80 cm - Zonder naam, olieverf op paneel, verkocht",
+    "073": "60x90 cm - Naakt op de rug gezien, olieverf op paneel, verkocht",
+    "074": "60x60 cm - Veerle Baetens, olieverf op paneel",
+    "075": "40x40 cm - Hanna, olieverf op doek, verkocht",
+    "076": "60x60 cm - Dora Delyiska, olieverf op paneel",
+    "077": "60x60 cm - Lilith, olieverf op paneel, verkocht",
+    "078": "50x60 cm - De pianiste, olieverf op paneel, verkocht",
+    "079": "60x60 cm - Pur ti miro, olieverf op paneel",
+    "080": "50x60 cm - Marie Doro, olieverf en bladgoud op paneel, verkocht"
+};   // ← dit is de enige juiste afsluiting
+
+// voeg hier jouw eigen beschrijvingen toe
+
+
+  
+    for (let i = 1; i <= 999; i++) {
+        const num = String(i).padStart(3, '0');
+        const filename = `object${num}.jpg`;
+
+        const img = new Image();
+        img.src = filename;
+
+        img.onload = () => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+
+
+            const thumb = document.createElement('img');
+            thumb.src = filename;
+            thumb.className = 'thumb';
+
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = captions[num] || `object${num}`;
+
+            thumb.onclick = () => {
+                document.getElementById('bigimg').src = filename;
+                document.getElementById('overlay').style.display = 'flex';
+            };
+
+            item.appendChild(thumb);
+            item.appendChild(caption);
+            gallery.appendChild(item);
+        };
+    }
+
+    // Overlay sluiten
+    const overlay = document.getElementById('overlay');
+    overlay.onclick = () => overlay.style.display = 'none';
+
+    // ESC sluit ook
+    document.onkeydown = (e) => {
+        if (e.key === "Escape") overlay.style.display = 'none';
+    };
+</script>
+
+</body>
+</html>
+

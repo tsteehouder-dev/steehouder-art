@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Schilderijen uit 2019</title>
+<link rel="stylesheet" href="../../css/style.css">
+
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Schilderijen uit 2019</h1>
+    <p>Klik op een thumbnail om de afbeelding te vergroten, klik opnieuw om terug te keren.</p>
+
+    <div class="gallery"></div>
+
+    <div id="overlay">
+        <img id="bigimg" src="">
+    </div>
+</div>
+
+<script>
+    const gallery = document.querySelector('.gallery');
+
+    // Beschrijvingen per object (pas aan zoals jij wilt)
+    const captions = {
+
+"097": "60x52 cm - 097 Ditta, olieverf op paneel, verkocht",
+"098": "60x60 cm - 098 Pride, olieverf op paneel, verkocht",
+"099": "60x60 cm - 099 Cato, olieverf op paneel, verkocht",
+"100": "60x60 cm - 100 Memories, olieverf op paneel, verkocht",
+"101": "25x30 cm - 101 Trudy, jong, olieverf op doek",
+"102": "40x50 cm - 102 Robbe, olieverf op doek",
+"103": "60x60 cm - 103 Ditta met blauwe bloese, olieverf op paneel, verkocht",
+"104": "12x26 cm - 104 Madonna met kind, olieverf op antiek paneeltje",
+"105": "60x60 cm - 105 Meisje met hond, olieverf op paneel, verkocht",
+"106": "50x60 cm - 106 Rosalie (1), olieverf op paneel, verkocht",
+"107": "50x60 cm - 107 Trudy, olieverf op paneel",
+"108": "50x50 cm - 108 Rosalie (2), olieverf op paneel, verkocht",
+"109": "60x50 cm - 109 Trudy 1966, olieverf op paneel",
+"110": "60x40 cm - 110 Naakt op de rug gezien, olieverf op paneel, verkocht",
+"111": "60x60 cm - 111 Zelfportret met hond, olieverf op paneel",
+"112": "60x60 cm - 112 Schone Slaapster, olieverf op paneel",
+"113": "60x60 cm - 113 Vrouw in witte jurk, olieverf op paneel, verkocht",
+"114": "60x60 cm - 114 Anachronie, olieverf op paneel",
+"115": "60x60 cm - 115 Zuzana, olieverf op paneel",
+"116": "60x60 cm - 116 Bernadette, olieverf op paneel, verkocht"
+
+
+};   // ← dit is de enige juiste afsluiting
+
+// voeg hier jouw eigen beschrijvingen toe
+
+
+  
+    for (let i = 1; i <= 999; i++) {
+        const num = String(i).padStart(3, '0');
+        const filename = `object${num}.jpg`;
+
+        const img = new Image();
+        img.src = filename;
+
+        img.onload = () => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+
+
+            const thumb = document.createElement('img');
+            thumb.src = filename;
+            thumb.className = 'thumb';
+
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = captions[num] || `object${num}`;
+
+            thumb.onclick = () => {
+                document.getElementById('bigimg').src = filename;
+                document.getElementById('overlay').style.display = 'flex';
+            };
+
+            item.appendChild(thumb);
+            item.appendChild(caption);
+            gallery.appendChild(item);
+        };
+    }
+
+    // Overlay sluiten
+    const overlay = document.getElementById('overlay');
+    overlay.onclick = () => overlay.style.display = 'none';
+
+    // ESC sluit ook
+    document.onkeydown = (e) => {
+        if (e.key === "Escape") overlay.style.display = 'none';
+    };
+</script>
+
+</body>
+</html>
+

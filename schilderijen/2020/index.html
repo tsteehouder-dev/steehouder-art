@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Schilderijen uit 2020</title>
+<link rel="stylesheet" href="../../css/style.css">
+
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Schilderijen uit 2020</h1>
+    <p>Klik op een thumbnail om de afbeelding te vergroten, klik opnieuw om terug te keren.</p>
+
+    <div class="gallery"></div>
+
+    <div id="overlay">
+        <img id="bigimg" src="">
+    </div>
+</div>
+
+<script>
+    const gallery = document.querySelector('.gallery');
+
+    // Beschrijvingen per object (pas aan zoals jij wilt)
+    const captions = {
+"117": "60x60 cm - 117 - Lisa, olieverf op paneel",  
+"118": "10x15 cm - 118 - Japans, olieverf op paneel, verkocht", 
+"119": "50x55 cm - 119 - Tatjana, olieverf op paneel, verkocht",
+"120": "10x15 cm - 120 - Japans 2, olieverf op paneel, verkocht",
+"121": "60x50 cm - 121 - Klaartje, olieverf op paneel",
+"122": "60x60 cm - 122 - Mamie, olieverf op paneel, verkocht",
+"123": "21x16 cm - 123 - Untitled, olieverf op canvas, verkocht",
+"124": "50x60 cm - 124 - I woke, olieverf op paneel",
+"125": "40x40 cm - 125 - Marie Doro, olieverf op canvas",
+"126": "50x60 cm - 126 - Meisje met druiven, olieverf op paneel, verkocht",
+"127": "60x40 cm - 127 - Tulpenboom, olieverf op paneel, verkocht",
+"128": "60x60 cm - 128 - Twee vrouwen, olieverf op polyester",
+"129": "25x30 cm - 129 - Deep thoughts in shallow water, olieverf op canvas, verkocht",
+"130": "25x30 cm - 130 - Sofia, olieverf op canvas, verkocht",
+"131": "80x60 cm - 131 - Heks, rustend, olieverf op canvas, verkocht",
+"132": "50x50 cm - 132 - Max, olieverf op paneel",
+"133": "60x50 cm - 133 - Vos/Fuchs/Fox, olieverf op paneel, verkocht",
+"134": "60x50 cm - 134 - Stana, olieverf op paneel, verloren gegaan",
+"135": "30x40 cm - 135 - Stana 2, olieverf op paneel, verkocht",
+"136": "60x50 cm - 136 - Wil, olieverf op paneel, verkocht",
+"137": "24x30 cm - 137 - Febe (17 jaar), olieverf op canvas, niet te koop",
+"138": "60x50 cm - 138 - Een slanke verschijning, olieverf op paneel, verkocht"
+        // voeg hier jouw eigen beschrijvingen toe
+    };
+
+    for (let i = 1; i <= 999; i++) {
+        const num = String(i).padStart(3, '0');
+        const filename = `object${num}.jpg`;
+
+        const img = new Image();
+        img.src = filename;
+
+        img.onload = () => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+
+
+            const thumb = document.createElement('img');
+            thumb.src = filename;
+            thumb.className = 'thumb';
+
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = captions[num] || `object${num}`;
+
+            thumb.onclick = () => {
+                document.getElementById('bigimg').src = filename;
+                document.getElementById('overlay').style.display = 'flex';
+            };
+
+            item.appendChild(thumb);
+            item.appendChild(caption);
+            gallery.appendChild(item);
+        };
+    }
+
+    // Overlay sluiten
+    const overlay = document.getElementById('overlay');
+    overlay.onclick = () => overlay.style.display = 'none';
+
+    // ESC sluit ook
+    document.onkeydown = (e) => {
+        if (e.key === "Escape") overlay.style.display = 'none';
+    };
+</script>
+
+</body>
+</html>
+
