@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Keramiek</title>
+<link rel="stylesheet" href="../css/style.css">
+
+
+</head>
+
+<body>
+<div class="container">
+    <h1>Keramiek</h1>
+    <p>Klik op een thumbnail om de afbeelding te vergroten, klik opnieuw om terug te keren.</p>
+
+    <div class="gallery"></div>
+
+    <div id="overlay">
+        <img id="bigimg" src="">
+    </div>
+</div>
+
+<script>
+    const gallery = document.querySelector('.gallery');
+
+    // Beschrijvingen per object (pas aan zoals jij wilt)
+    const captions = {
+    
+"001": "001 - Vrouw met bloem in het haar",
+"002": "002 - Dame met hondje, paperclay, acryl",
+"003": "003 - Poppy, buste",
+"004": "004 - Liggend naakt met hondje, 30 cm",
+"005": "005 - Lorelei, 30 cm hoog",
+"006": "006 - buste",
+"007": "007 - buste",
+"008": "008 - Stormy weather, paperclay",
+"009": "009 - Zittend naakt",
+"010": "010 - Red dress",
+"013": "013 - twee koppen",
+"034": "034 - buste, brons",
+"039": "039 - buste, terracotta, acrylverf",
+"040": "040 - buste, terracotta, acrylverf",
+"047": "047 - Medusa, terracotta, acrylverf",
+"181": "181 - zittend naakt, ongebakken klei",
+"182": "182 - liggend naakt, ongebakken klei"
+};   // ← dit is de enige juiste afsluiting
+
+// voeg hier jouw eigen beschrijvingen toe
+
+
+  
+    for (let i = 1; i <= 999; i++) {
+        const num = String(i).padStart(3, '0');
+        const filename = `object${num}.jpg`;
+
+        const img = new Image();
+        img.src = filename;
+
+        img.onload = () => {
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+
+
+            const thumb = document.createElement('img');
+            thumb.src = filename;
+            thumb.className = 'thumb';
+
+            const caption = document.createElement('div');
+            caption.className = 'caption';
+            caption.textContent = captions[num] || `object${num}`;
+
+            thumb.onclick = () => {
+                document.getElementById('bigimg').src = filename;
+                document.getElementById('overlay').style.display = 'flex';
+            };
+
+            item.appendChild(thumb);
+            item.appendChild(caption);
+            gallery.appendChild(item);
+        };
+    }
+
+    // Overlay sluiten
+    const overlay = document.getElementById('overlay');
+    overlay.onclick = () => overlay.style.display = 'none';
+
+    // ESC sluit ook
+    document.onkeydown = (e) => {
+        if (e.key === "Escape") overlay.style.display = 'none';
+    };
+</script>
+
+</body>
+</html>
+
