@@ -105,6 +105,11 @@ ul li {
     max-height: 90%;
 }
 
+.tekstpagina {
+    text-align: left;
+    max-width: 800px;   /* optioneel: mooie breedte voor leesbaarheid */
+    margin: 40px auto;  /* centreren van de pagina zelf, niet de tekst */
+}
 
 
 
